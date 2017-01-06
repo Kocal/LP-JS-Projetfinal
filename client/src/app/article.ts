@@ -6,6 +6,7 @@ export class Article {
               public created_by: number,
               public created_at: Date,
               public updated_by?: number,
-              public updated_at?: Date) {
+              public updated_at?: Date,
+              public tags?: string[]) {
   }
 }

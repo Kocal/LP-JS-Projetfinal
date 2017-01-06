@@ -42,7 +42,13 @@ app.get('/authors', (req, res) => {
 })
 
 app.get('/articles', (req, res) => {
-  db.query('SELECT id, title, body, created_at, created_by FROM articles', function (err, rows, fields) {
+  db.query(
+    'SELECT A.id, A.title, A.body, A.created_at, A.created_by, GROUP_CONCAT(T.value SEPARATOR "||") as tags' +
+    ' FROM articles A' +
+    ' INNER JOIN tags T' +
+    ' ON A.id = T.article_id' +
+    ' GROUP BY A.id' +
+    ' ORDER BY created_at DESC', function (err, rows, fields) {
     if (err) throw err;
     res.json({data: rows});
   });
@@ -65,7 +71,7 @@ app.post('/articles', (req, res) => {
     article.id = result.insertId
     const tags = []
 
-    for (let tag of req.body.tags) {
+    for (let tag of req.body.tags || []) {
       tags.push([article.id, tag])
     }
 
@@ -75,7 +81,7 @@ app.post('/articles', (req, res) => {
         return
       }
 
-      res.status(201).json({data: {article_id: article.id}});
+      res.status(201).json({data: article.id});
     })
   })
 })

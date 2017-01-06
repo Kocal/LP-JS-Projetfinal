@@ -32,7 +32,7 @@ export class AdminApiService {
       .toPromise()
       .then(this.extractData)
       .then(articles => articles.map(a =>
-        new Article(a.id, a.title, a.body, a.created_by, a.created_at)
+        new Article(a.id, a.title, a.body, a.created_by, a.created_at, a.updated_by, a.updated_at, a.tags.split('||'))
       ))
       .catch(this.handleError)
   }

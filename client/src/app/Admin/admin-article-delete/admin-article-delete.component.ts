@@ -18,7 +18,7 @@ export class AdminArticleDeleteComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (param: any) => {
         this.api.deleteArticle(+param['id'])
-          .then(_ => this.router.navigate(['admin/']))
+          .then(_ => this.router.navigate(['admin/articles']))
           .catch(alert)
       });
     // this.api.deleteArticle(this.router)

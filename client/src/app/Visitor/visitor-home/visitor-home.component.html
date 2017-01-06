@@ -14,6 +14,7 @@
         </section>
         <footer class="panel-footer">
           Créé le {{article.created_at}}
+          <a *ngFor="let tag of article.tags" routerLink="/tags/{{tag}}" class="badge">{{tag}}</a>
         </footer>
       </article>
 
