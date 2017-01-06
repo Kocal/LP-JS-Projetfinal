@@ -1,7 +1,7 @@
 import "rxjs/add/operator/do";
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AdminHeaderComponent} from "./Admin/admin-header/admin-header.component";
@@ -12,6 +12,7 @@ import {VisitorFooterComponent} from "./Visitor/visitor-footer/visitor-footer.co
 import {routing} from "./app.routes";
 import {AdminArticlesComponent} from "./Admin/admin-articles/admin-articles.component";
 import {AdminAuthorsComponent} from "./Admin/admin-authors/admin-authors.component";
+import {AdminArticleFormComponent} from "./Admin/admin-article-form/admin-article-form.component";
 import {RlTagInputModule} from "angular2-tag-input";
 
 @NgModule({
@@ -24,10 +25,11 @@ import {RlTagInputModule} from "angular2-tag-input";
     VisitorHomeComponent,
     VisitorHeaderComponent,
     VisitorFooterComponent,
+    AdminArticleFormComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RlTagInputModule,
     routing

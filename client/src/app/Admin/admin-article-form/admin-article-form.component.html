@@ -1,0 +1,29 @@
+<h2 class="page-header">Ajouter un article</h2>
+
+<form [formGroup]="articleAddForm" (ngSubmit)="onSubmited()">
+
+  <div
+      [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.title.dirty && !articleAddForm.controls.title.valid}">
+    <label for="inputTitle" class="control-label">Titre</label>
+    <input formControlName="title" type="text" class="form-control" id="inputTitle">
+  </div>
+
+  <div
+      [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.slug.dirty && !articleAddForm.controls.slug.valid}">
+    <label for="inputSlug" class="control-label">Slug</label>
+    <input formControlName="slug" type="text" class="form-control" id="inputSlug">
+  </div>
+
+  <div
+      [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.body.dirty && !articleAddForm.controls.body.valid}">
+    <label for="inputBody" class="control-label">Contenu</label>
+    <textarea formControlName="body" class="form-control" id="inputBody" rows="10"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="inputTags">Tags</label>
+    <rl-tag-input formControlName="tags" id="inputTags" placeholder="Testing placeholder"></rl-tag-input>
+  </div>
+
+  <button type="submit" class="btn btn-default">Publier</button>
+</form>
