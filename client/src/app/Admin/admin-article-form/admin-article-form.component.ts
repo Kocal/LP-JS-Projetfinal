@@ -39,13 +39,9 @@ export class AdminArticleFormComponent implements OnInit {
   onSubmitted() {
     this.submitted = true
 
-    console.log(this.articleAddForm)
-    console.log(this.articleAddForm.value)
-
     if (this.articleAddForm.valid) {
-      console.log('valid');
       this.api.createArticle(this.articleAddForm.value)
-        .then(articleId => this.router.navigate(['admin/articles', articleId]))
+        .then(articleId => this.router.navigate(['admin/articles/edit', articleId]))
         .catch(error => this.errorMessage = error)
     } else {
       this.errorMessage = 'Le formulaire est invalide.'

@@ -1,3 +1,25 @@
-<p>
-  visitor-home works!
-</p>
+<app-visitor-header></app-visitor-header>
+
+<div class="container">
+
+  <div class="row">
+    <div *ngFor="let article of articles" class="col-md-6">
+
+      <article class="panel panel-default">
+        <header class="panel-heading">
+          <a routerLink="/articles/{{article.id}}">{{article.title}}</a>
+        </header>
+        <section class="panel-body">
+          {{article.body | truncate : 200}}
+        </section>
+        <footer class="panel-footer">
+          Créé le {{article.created_at}}
+        </footer>
+      </article>
+
+    </div>
+  </div>
+
+</div>
+
+<app-visitor-footer></app-visitor-footer>

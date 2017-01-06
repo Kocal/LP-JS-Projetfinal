@@ -1,5 +1,27 @@
 <app-admin-header></app-admin-header>
 
-<p>
-  admin-articles works!
-</p>
+<div class="container">
+  <p>Les articles</p>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let article of articles">
+      <article class="panel panel-default">
+        <header class="panel-heading">
+          {{article.title}}
+        </header>
+        <section class="panel-body">
+          {{ article.body | truncate : 80 }}
+        </section>
+        <footer class="panel-footer">
+          <a
+              routerLink="/admin/articles/{{article.id}}/edit"
+              class="btn btn-primary">Edit</a>
+          <a
+              routerLink="/admin/articles/{{article.id}}/delete"
+              onclick="return confirm('Voulez-vous vraiment supprimer l\'article ?')"
+              class="btn btn-danger">Delete</a>
+        </footer>
+      </article>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import "rxjs/add/operator/do";
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AdminHeaderComponent} from "./Admin/admin-header/admin-header.component";
@@ -15,10 +15,19 @@ import {AdminAuthorsComponent} from "./Admin/admin-authors/admin-authors.compone
 import {AdminArticleFormComponent} from "./Admin/admin-article-form/admin-article-form.component";
 import {RlTagInputModule} from "angular2-tag-input";
 import {AdminApiService} from "./Admin/admin-api.service";
+import {AdminArticleEditComponent} from "./Admin/admin-article-edit/admin-article-edit.component";
+import {MomentModule} from "angular2-moment";
+import {AdminArticleDeleteComponent} from "./Admin/admin-article-delete/admin-article-delete.component";
+import {VisitorTagsComponent} from "./Visitor/visitor-tags/visitor-tags.component";
+import {VisitorAuthorsComponent} from "./Visitor/visitor-authors/visitor-authors.component";
+import {VisitorArticleDetailsComponent} from "./Visitor/visitor-article-details/visitor-article-details.component";
+import {VisitorTagDetailsComponent} from "./Visitor/visitor-tag-details/visitor-tag-details.component";
+import {TruncatePipe} from "angular2-truncate";
 
 @NgModule({
   declarations: [
     AppComponent,
+    TruncatePipe,
     AdminHeaderComponent,
     AdminHomeComponent,
     AdminArticlesComponent,
@@ -27,12 +36,19 @@ import {AdminApiService} from "./Admin/admin-api.service";
     VisitorHeaderComponent,
     VisitorFooterComponent,
     AdminArticleFormComponent,
+    AdminArticleEditComponent,
+    AdminArticleDeleteComponent,
+    VisitorTagsComponent,
+    VisitorAuthorsComponent,
+    VisitorArticleDetailsComponent,
+    VisitorTagDetailsComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
     RlTagInputModule,
+    MomentModule,
     routing
   ],
   providers: [

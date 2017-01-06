@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
+import {AdminApiService} from "../../Admin/admin-api.service";
+import {Article} from "../../article";
 
 @Component({
   selector: 'app-visitor-home',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitorHomeComponent implements OnInit {
 
-  constructor() { }
+  articles: Article[];
 
-  ngOnInit() {
+  constructor(private api: AdminApiService) {
   }
 
+  ngOnInit() {
+    this.api.getArticles()
+      .then(articles => this.articles = articles)
+  }
 }

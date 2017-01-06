@@ -27,6 +27,23 @@ export class AdminApiService {
       .catch(this.handleError)
   }
 
+  public getArticles(): Promise<Article[]> {
+    return this.http.get(`${this.API_URL}/articles`)
+      .toPromise()
+      .then(this.extractData)
+      .then(articles => articles.map(a =>
+        new Article(a.id, a.title, a.body, a.created_by, a.created_at)
+      ))
+      .catch(this.handleError)
+  }
+
+  public deleteArticle(article_id: number): Promise {
+    return this.http.delete(`${this.API_URL}/articles/${article_id}`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     let body = res.json()
     return body.data || []

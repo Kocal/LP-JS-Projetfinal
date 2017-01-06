@@ -41,6 +41,13 @@ app.get('/authors', (req, res) => {
   });
 })
 
+app.get('/articles', (req, res) => {
+  db.query('SELECT id, title, body, created_at, created_by FROM articles', function (err, rows, fields) {
+    if (err) throw err;
+    res.json({data: rows});
+  });
+})
+
 app.post('/articles', (req, res) => {
   const article = {
     title: req.body.title,
@@ -73,6 +80,27 @@ app.post('/articles', (req, res) => {
   })
 })
 
+app.delete('/articles/:id', (req, res) => {
+  const article_id = req.params.id
+
+  db.query('DELETE FROM `tags` WHERE article_id = ?', [article_id], (err, result) => {
+    if (err) {
+      console.error(err)
+      res.status(400).json({data: {error: err}})
+      return
+    }
+
+    db.query('DELETE FROM `articles` WHERE id = ?', [article_id], (err, result) => {
+      if (err) {
+        console.error(err)
+        res.status(400).json({data: {error: err}})
+        return
+      }
+
+      res.status(201).json({data: [true]})
+    })
+  })
+})
 
 /**
  * ============================================================================
