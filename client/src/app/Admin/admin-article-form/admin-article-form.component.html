@@ -1,6 +1,8 @@
 <h2 class="page-header">Ajouter un article</h2>
 
-<form [formGroup]="articleAddForm" (ngSubmit)="onSubmited()">
+<form [formGroup]="articleAddForm" (ngSubmit)="onSubmitted()">
+
+  <div *ngIf="submitted && articleAddForm.invalid" class="alert alert-danger">{{ errorMessage }}</div>
 
   <div
       [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.title.dirty && !articleAddForm.controls.title.valid}">
@@ -9,21 +11,28 @@
   </div>
 
   <div
-      [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.slug.dirty && !articleAddForm.controls.slug.valid}">
-    <label for="inputSlug" class="control-label">Slug</label>
-    <input formControlName="slug" type="text" class="form-control" id="inputSlug">
-  </div>
-
-  <div
       [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.body.dirty && !articleAddForm.controls.body.valid}">
     <label for="inputBody" class="control-label">Contenu</label>
     <textarea formControlName="body" class="form-control" id="inputBody" rows="10"></textarea>
   </div>
+
+  <div
+      [ngClass]="{'form-group': true, 'has-error': articleAddForm.controls.created_by.dirty && !articleAddForm.controls.created_by.valid}">
+    <label for="inputCreatedBy" class="control-label">Créé par</label>
+    <select formControlName="created_by" id="inputCreatedBy" class="form-control">
+      <option *ngFor="let author of authors" [value]="author.id">{{author.lastname}} {{author.firstname}}</option>
+    </select>
+  </div>
+
 
   <div class="form-group">
     <label for="inputTags">Tags</label>
     <rl-tag-input formControlName="tags" id="inputTags" placeholder="Testing placeholder"></rl-tag-input>
   </div>
 
-  <button type="submit" class="btn btn-default">Publier</button>
+  <div class="text-center">
+
+    <button type="reset" class="btn btn-default">Reset</button>
+    <button type="submit" class="btn btn-primary">Publier</button>
+  </div>
 </form>

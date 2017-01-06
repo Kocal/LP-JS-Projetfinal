@@ -8,6 +8,7 @@ import {AdminArticlesComponent} from "./Admin/admin-articles/admin-articles.comp
 const routes: Routes = [
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/articles', component: AdminArticlesComponent},
+  {path: 'admin/articles/:id', component: AdminArticlesComponent},
   {path: 'admin/authors', component: AdminAuthorsComponent},
   {path: '', component: VisitorHomeComponent}
 ];

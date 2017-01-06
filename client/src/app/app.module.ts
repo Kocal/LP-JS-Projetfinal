@@ -14,6 +14,7 @@ import {AdminArticlesComponent} from "./Admin/admin-articles/admin-articles.comp
 import {AdminAuthorsComponent} from "./Admin/admin-authors/admin-authors.component";
 import {AdminArticleFormComponent} from "./Admin/admin-article-form/admin-article-form.component";
 import {RlTagInputModule} from "angular2-tag-input";
+import {AdminApiService} from "./Admin/admin-api.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import {RlTagInputModule} from "angular2-tag-input";
     RlTagInputModule,
     routing
   ],
-  providers: [],
+  providers: [
+    AdminApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
