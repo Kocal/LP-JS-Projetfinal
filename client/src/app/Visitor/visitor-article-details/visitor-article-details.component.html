@@ -1,9 +1,23 @@
 <app-visitor-header></app-visitor-header>
 
-<div class="container">
-  <p>
-    visitor-article-details works!
-  </p>
+<div class="container" *ngIf="article">
+  <article>
+
+    <header>
+      <h2>{{article.title }}</h2>
+    </header>
+    <section>
+      {{article.body}}
+    </section>
+    <footer>
+      <hr>
+      Créé le {{article.created_at}}, par
+      <a routerLink="/authors/{{article.created_by.id}}">{{article.created_by.toString()}}</a>
+      &bull;
+      <a *ngFor="let tag of article.tags" routerLink="/tags/{{tag}}" class="badge">{{tag}}</a>
+    </footer>
+
+  </article>
 </div>
 
 <app-visitor-footer></app-visitor-footer>

@@ -42,7 +42,6 @@ CREATE TABLE `article_tags` (
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
   `body` longtext,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,

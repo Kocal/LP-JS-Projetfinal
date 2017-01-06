@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminApiService} from "../../Admin/admin-api.service";
 
 @Component({
   selector: 'app-visitor-tags',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitorTagsComponent implements OnInit {
 
-  constructor() { }
+  tags: any[];
+
+  constructor(
+    private api: AdminApiService
+  ) { }
 
   ngOnInit() {
+    this.api.getTags()
+      .then(tags => this.tags = tags)
   }
 
 }

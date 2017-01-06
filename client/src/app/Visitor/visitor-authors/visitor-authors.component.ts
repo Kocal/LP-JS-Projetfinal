@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
+import {AdminApiService} from "../../Admin/admin-api.service";
+import {Author} from "../../author";
 
 @Component({
   selector: 'app-visitor-authors',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitorAuthorsComponent implements OnInit {
 
-  constructor() { }
+  authors: Author[];
+
+  constructor(private api: AdminApiService) {
+  }
 
   ngOnInit() {
+    this.api.getAuthors()
+      .then(authors => this.authors = authors)
   }
 
 }

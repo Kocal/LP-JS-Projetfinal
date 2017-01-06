@@ -34,11 +34,44 @@ app.get('/', (req, res) => {
   res.end()
 })
 
+app.get('/tags', (req, res) => {
+  db.query('SELECT value FROM tags GROUP BY value', function (err, rows, fields) {
+    if (err) throw err;
+    res.json({data: rows});
+  });
+})
+
+app.get('/tags/:tag', (req, res) => {
+  db.query(
+    'SELECT GROUP_CONCAT(A.id SEPARATOR "||") AS articles_id' +
+    ' FROM tags T' +
+    ' INNER JOIN articles A' +
+    ' ON T.article_id = A.id' +
+    ' WHERE T.value = ?', [req.params.tag], function (err, rows, fields) {
+    if (err) throw err;
+    res.json({data: rows[0].articles_id});
+  });
+})
+
 app.get('/authors', (req, res) => {
   db.query('SELECT * FROM authors', function (err, rows, fields) {
     if (err) throw err;
     res.json({data: rows});
   });
+})
+
+app.get('/authors/:id', (req, res) => {
+  db.query(
+    'SELECT Au.id, Au.firstname, Au.lastname,' +
+    ' GROUP_CONCAT(Ar.id SEPARATOR "||") AS articles_id ' +
+    ' FROM authors Au' +
+    ' INNER JOIN articles Ar' +
+    ' ON Au.id = Ar.created_by ' +
+    ' WHERE Au.id = ?' +
+    ' GROUP BY Au.id', [req.params.id], function (err, rows, fields) {
+      if (err) throw err;
+      res.json({data: rows[0]});
+    });
 })
 
 app.get('/articles', (req, res) => {
@@ -48,10 +81,27 @@ app.get('/articles', (req, res) => {
     ' INNER JOIN tags T' +
     ' ON A.id = T.article_id' +
     ' GROUP BY A.id' +
-    ' ORDER BY created_at DESC', function (err, rows, fields) {
-    if (err) throw err;
-    res.json({data: rows});
-  });
+    ' ORDER BY created_at DESC', function (err, articles, fields) {
+      if (err) throw err;
+      res.json({data: articles});
+    });
+})
+
+app.get('/articles/:id', (req, res) => {
+  db.query(
+    'SELECT A.id, A.title, A.body, A.created_at, GROUP_CONCAT(T.value SEPARATOR "||") as tags,' +
+    ' Au.id AS author_id, Au.firstname AS author_firstname, Au.lastname AS author_lastname' +
+    ' FROM articles A' +
+    ' INNER JOIN tags T' +
+    ' ON A.id = T.article_id' +
+    ' INNER JOIN authors Au' +
+    ' ON A.created_by = Au.id' +
+    ' WHERE A.id = ?' +
+    ' GROUP BY A.id' +
+    ' ORDER BY created_at DESC', [req.params.id], function (err, articles, fields) {
+      if (err) throw err;
+      res.json({data: articles[0]});
+    });
 })
 
 app.post('/articles', (req, res) => {

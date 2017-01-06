@@ -1,9 +1,10 @@
 <app-visitor-header></app-visitor-header>
 
 <div class="container">
-  <p>
-    visitor-tags works!
-  </p>
+  <h2>Liste des tags</h2>
+  <div *ngIf="tags">
+    <a *ngFor="let tag of tags" routerLink="/tags/{{tag.value}}" class="badge">{{tag.value}}</a>
+  </div>
 </div>
 
 <app-visitor-footer></app-visitor-footer>

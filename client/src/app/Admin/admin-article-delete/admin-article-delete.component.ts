@@ -21,7 +21,5 @@ export class AdminArticleDeleteComponent implements OnInit {
           .then(_ => this.router.navigate(['admin/articles']))
           .catch(alert)
       });
-    // this.api.deleteArticle(this.router)
   }
-
 }

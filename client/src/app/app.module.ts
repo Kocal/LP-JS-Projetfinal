@@ -11,7 +11,6 @@ import {VisitorHeaderComponent} from "./Visitor/visitor-header/visitor-header.co
 import {VisitorFooterComponent} from "./Visitor/visitor-footer/visitor-footer.component";
 import {routing} from "./app.routes";
 import {AdminArticlesComponent} from "./Admin/admin-articles/admin-articles.component";
-import {AdminAuthorsComponent} from "./Admin/admin-authors/admin-authors.component";
 import {AdminArticleFormComponent} from "./Admin/admin-article-form/admin-article-form.component";
 import {RlTagInputModule} from "angular2-tag-input";
 import {AdminApiService} from "./Admin/admin-api.service";
@@ -23,6 +22,7 @@ import {VisitorAuthorsComponent} from "./Visitor/visitor-authors/visitor-authors
 import {VisitorArticleDetailsComponent} from "./Visitor/visitor-article-details/visitor-article-details.component";
 import {VisitorTagDetailsComponent} from "./Visitor/visitor-tag-details/visitor-tag-details.component";
 import {TruncatePipe} from "angular2-truncate";
+import {VisitorAuthorDetailsComponent} from "./Visitor/visitor-author-details/visitor-author-details.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import {TruncatePipe} from "angular2-truncate";
     AdminHeaderComponent,
     AdminHomeComponent,
     AdminArticlesComponent,
-    AdminAuthorsComponent,
     VisitorHomeComponent,
     VisitorHeaderComponent,
     VisitorFooterComponent,
@@ -42,6 +41,7 @@ import {TruncatePipe} from "angular2-truncate";
     VisitorAuthorsComponent,
     VisitorArticleDetailsComponent,
     VisitorTagDetailsComponent,
+    VisitorAuthorDetailsComponent,
   ],
   imports: [
     BrowserModule,

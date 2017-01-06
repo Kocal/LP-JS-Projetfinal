@@ -27,6 +27,14 @@ export class AdminApiService {
       .catch(this.handleError)
   }
 
+  public getAuthor(author_id: number): Promise<Author> {
+    return this.http.get(`${this.API_URL}/authors/${author_id}`)
+      .toPromise()
+      .then(this.extractData)
+      .then(a => new Author(a.id, a.firstname, a.lastname, a.articles_id.split('||')))
+      .catch(this.handleError)
+  }
+
   public getArticles(): Promise<Article[]> {
     return this.http.get(`${this.API_URL}/articles`)
       .toPromise()
@@ -37,11 +45,39 @@ export class AdminApiService {
       .catch(this.handleError)
   }
 
+  public getArticle(article_id: number): Promise<Article> {
+    return this.http.get(`${this.API_URL}/articles/${article_id}`)
+      .toPromise()
+      .then(this.extractData)
+      .then(a => new Article(
+        a.id, a.title, a.body,
+        new Author(a.author_id, a.author_firstname, a.author_lastname),
+        a.created_at,
+        a.updated_by,
+        a.updated_at, a.tags.split('||'))
+      )
+      .catch(this.handleError)
+  }
+
   public deleteArticle(article_id: number): Promise {
     return this.http.delete(`${this.API_URL}/articles/${article_id}`)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
+  }
+
+  public getTags(): Promise<string[]> {
+    return this.http.get(`${this.API_URL}/tags`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError)
+  }
+
+  public getArticlesByTag(tag: string): Promise<any> {
+    return this.http.get(`${this.API_URL}/tags/${tag}`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError)
   }
 
   private extractData(res: Response) {

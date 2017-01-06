@@ -1,9 +1,9 @@
 <app-visitor-header></app-visitor-header>
 
-<div class="container">
-  <h2>Tag: {{tag}}</h2>
+<div class="container" *ngIf="author">
+  <h2>{{author.toString()}}</h2>
   <ul>
-    <li *ngFor="let article_id of articles_id">
+    <li *ngFor="let article_id of author.articles_id">
       <a routerLink="/articles/{{article_id}}">Article #{{article_id}}</a>
     </li>
   </ul>
