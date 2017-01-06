@@ -1,3 +1,4 @@
+import "rxjs/add/operator/do";
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
@@ -11,6 +12,7 @@ import {VisitorFooterComponent} from "./Visitor/visitor-footer/visitor-footer.co
 import {routing} from "./app.routes";
 import {AdminArticlesComponent} from "./Admin/admin-articles/admin-articles.component";
 import {AdminAuthorsComponent} from "./Admin/admin-authors/admin-authors.component";
+import {RlTagInputModule} from "angular2-tag-input";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {AdminAuthorsComponent} from "./Admin/admin-authors/admin-authors.compone
     BrowserModule,
     FormsModule,
     HttpModule,
+    RlTagInputModule,
     routing
   ],
   providers: [],
